@@ -8,10 +8,11 @@ module.exports = {
 }
 
 function show(req, res) {
-    res.render('flights/show', {
-      flight: Flight.getOne(req.params.id),
-      title: 'Flight Details'
-    });
+    Flight.findById(req.params.id)
+      .exec(function (err, flight) {
+          console.log(flight);
+          res.render("flights/show", { title: "Flight Detail", flight });
+        });
   }
 
 function index(req, res) {
